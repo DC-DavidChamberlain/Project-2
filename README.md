@@ -13,10 +13,16 @@ This is a data tracking application that records the maintnance status of your v
 ## Installation
 
 1. 
+```
 Clone the repository:git@github.com:DC-DavidChamberlain/Project-2.git
+```
 2. 
 ```
 npm i 
+```
+3. 
+```
+npm run dev
 ```
 3. 
 ```
