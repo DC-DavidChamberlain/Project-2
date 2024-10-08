@@ -12,26 +12,47 @@ export const getUserVehicles = async (req: Request, res: Response) => {
     });
     res.json(vehicles);
   } catch (error) {
-   // handleErrors(res, error);
+    // handleErrors(res, error);
   }
 };
 
 export const createUserVehicle = async (req: Request, res: Response) => {
   try {
     const userId = req.params.userId;
-    const { make, model, year, licensePlate } = req.body;
+    const {
+      vin,
+      make,
+      model,
+      year,
+      typeOfGas,
+      gallonsOfGas,
+      distance,
+      mileage,
+      color,
+      price,
+      tires,
+      tiresCondition,
+    } = req.body;
     const newVehicle = await prisma.vehicle.create({
       data: {
         userId: parseInt(userId),
+        vin,
         make,
         model,
         year,
-        licensePlate,
+        typeOfGas,
+        gallonsOfGas,
+        distance,
+        mileage,
+        color,
+        price,
+        tires,
+        tiresCondition,
       },
     });
     res.status(201).json(newVehicle);
   } catch (error) {
-   // handleErrors(res, error);
+    // handleErrors(res, error);
   }
 };
 

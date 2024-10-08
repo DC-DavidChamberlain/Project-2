@@ -5,12 +5,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './pages/ErrorPage.tsx';
 import Login from './pages/Login.tsx';
 import Landing from './pages/Landing.tsx';
-import Landing from './pages/Landing.tsx';
+
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Login />,
     element: <Login />,
     errorElement: <ErrorPage />,
     children: [

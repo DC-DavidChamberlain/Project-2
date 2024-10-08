@@ -3,30 +3,34 @@ import { User } from './user.js';
 
 interface AlertAttributes {
     id: number;
-    type: string;
+    type: string
+    snow?: string;
+    
     message: string;
     severity: string;
-    createdAt?: Date;
-    updatedAt?: Date;
 }
 
 interface AlertCreationAttributes extends Optional<AlertAttributes, 'id'> { }
 
-class Alert extends Model<AlertAttributes, AlertCreationAttributes> implements AlertAttributes {
+class Alerts extends Model<AlertAttributes, AlertCreationAttributes> implements AlertAttributes {
     public id!: number;
     public type!: string;
+    public snow! : string;
     public message!: string;
     public severity!: string;
-
     public readonly assignedUser?: User;
 }
-export function VehicleFactory(sequelize: Sequelize): typeof Alert {
-    Alert.init(
+export function AlertsFactory(sequelize: Sequelize): typeof Alerts {
+    Alerts.init(
     {
         id: {
             type: DataTypes.INTEGER.UNSIGNED,
             autoIncrement: true,
             primaryKey: true,
+        },
+        snow: {   
+            type: DataTypes.STRING,
+            allowNull: false,
         },
         type: {
             type: DataTypes.STRING,
@@ -47,5 +51,5 @@ export function VehicleFactory(sequelize: Sequelize): typeof Alert {
 
     }
 );
-    return Alert;
+    return Alerts;
 }
