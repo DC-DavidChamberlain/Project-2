@@ -2,13 +2,17 @@ import { useState, type FormEvent, type ChangeEvent } from 'react';
 
 import Auth from '../utils/auth';
 import { login } from '../api/authAPI';
+import { useNavigate } from 'react-router-dom';
 import type { UserLogin } from '../interfaces/UserLogin';
+import "../index.css";
 
-const Login = () => {
+function LoginPage() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginData, setLoginData] = useState<UserLogin>({
     username: '',
     password: '',
   });
+  const navigate = useNavigate();
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -25,15 +29,31 @@ const Login = () => {
     try {
       const data = await login(loginData);
       Auth.login(data.token);
+      setIsLoggedIn(true);
+
+
     } catch (err) {
       console.error('Failed to login', err);
     }
+
   };
 
+  // if (isLoggedIn) {
+  //   navigate('/Landing');
+  // }
+  if (isLoggedIn) {
+    navigate('/');
+    return;
+  }
+  else {
+    alert("Invalid username or password. Please try again.");
+  }
   return (
-    <div className='form-container'>
+    <div className='form-container1'>
       <form className='form login-form' onSubmit={handleSubmit}>
-        <h1>Login</h1>
+        <h2>Welcome to the World of Car</h2>
+        <h2>Maintenance Logbook</h2>
+        <h1>Please Login</h1>
         <div className='form-group'>
           <label>Username</label>
           <input
@@ -62,6 +82,8 @@ const Login = () => {
       </form>
     </div>
   );
-};
+}
 
-export default Login;
+export default LoginPage;
+
+
